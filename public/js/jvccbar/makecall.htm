@@ -1,0 +1,32 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title>测试</title>
+	</head>
+	<body onload="window_onload();" >
+     <DIV style='position:absolute;border:0px solid #ff3900; left:3px;top:3px;'>
+    目标参数:
+    <INPUT type="text" id="DestNum" NAME="DestNum" size="18" title="变量名称:DestNum">
+     <input type ="button" onclick="queryAgentStatus();" value ="刷新">
+    <br>
+		<TEXTAREA id="TextareaInfo" name="TextareaInfo" rows="22" cols="60" value="" style="overflow:auto;font-family:verdana;font-size:12px"></TEXTAREA>
+	</DIV>
+	</body>
+</html>
+
+	<script type="text/javascript">
+	    var application;
+	    function window_onload() {
+	        application = window.dialogArguments.application;
+	        window.dialogArguments.oMakeCallDlg = this;
+	    }
+
+	    function queryAgentStatus() {
+	        application.oJVccBar.QuerySPGroupList(DestNum.value, -1, 10, 1);
+	    }
+	    function Display(str) {
+	        TextareaInfo.value = TextareaInfo.value + str;
+	    }
+    	
+    	
+    </script>

@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
+
+	<title>JVccBar-Help</title>
+		<style> BODY { FONT-FAMILY: "Microsoft JhengHei"; FONT-SIZE: 14px; SCROLLBAR-HIGHLIGHT-COLOR: #f5f9ff; SCROLLBAR-SHADOW-COLOR: #828282; SCROLLBAR-3DLIGHT-COLOR: #828282; SCROLLBAR-ARROW-COLOR: #797979; SCROLLBAR-TRACK-COLOR: #ffffff; SCROLLBAR-FACE-COLOR: #66b7ef; SCROLLBAR-DARKSHADOW-COLOR: #ffffff }
+	</style>
+
+</head>
+<body style="margin-left:20px;margin-top:20px;">
+<p>Help</p>
+<ol>
+    <li>开发步骤</li>
+	    A.先下载<a href="version/JS-CINVCCBar.rar" target="_blank" >最新电话条版本文档</a>; 
+		<ul>《CIN-DCP-JVCCBAR二次开发文档和使用说明.pdf 》是js电话条总的开发包说明；</ul>
+        <ul>《CIN-DCP-CINVCCBAR二次开发文档和使用说明.pdf 》是电话条详细属性、方法、事件说明，是以前电话条的二次开发文档；</ul>
+        <ul>《CINVCCBAR-Setup(20.YYMMNN).rar 》是电话条安装包；</ul>
+        <ul>《JVccBar(1.0.0.X).rar》是js电话条版本及demo，JVccBar\index.html  打开就能见到各种demo；</ul>
+		<br>
+	    B.安装及卸载电话条<br>
+		   <ul>解压得到setup.exe。安装时：xp下直接双击运行；win7及以上版本，<font color="red">右键以“管理员身份运行”</font>。卸载时运行方式和安装一样，只是选择“移去”，一定不能选“修复”;</ul>
+		<br>
+		C.如果使用Silverlight版本(或者使用监控),请参考《silverlight版本设置.pdf》,安装手册操作就可以了;<br>
+		<br>
+		D.先参考《CIN-DCP-JVCCBAR二次开发文档和使用说明.doc》，配合<a href="index.html" >demo</a>；
+    <br>
+	<br>
+    <li>开发问题</li>
+		由于电话条只是一个高度集成的插件，每个用户的服务器都可能不一样，所以我们工程人员肯定都会给第三方常见提供环境参数信息；<br>
+		<br>
+		A.参数设置<br>
+		<ul>红颜色的工程人员给你提供，其他就安装上面代码设置就可以了，详细请参考《CIN-DCP-CINVCCBAR二次开发文档和使用说明.doc 》。</ul>
+        <ul>application.oJVccBar.SetAttribute("MainIP",<font color="red">serverIP</font>);  //MainIP</ul>
+        <ul>application.oJVccBar.SetAttribute("MainPortID",14800);  //MainPort</ul>
+        <ul>application.oJVccBar.SetAttribute("BackIP",serverIP);  //BackIP</ul>
+        <ul>application.oJVccBar.SetAttribute("BackPortID",14800);  //BackPort</ul>
+        <ul>application.oJVccBar.SetAttribute("MonitorIP",<font color="red">serverIP</font>);  //MonitorIP</ul>
+        <ul>application.oJVccBar.SetAttribute("MonitorPort",4502);  //MainPort</ul>
+        <ul>application.oJVccBar.SetAttribute("SipServerIP",<font color="red">serverIP</font>);</ul>
+        <ul>application.oJVccBar.SetAttribute("SipServerPort",<font color="red">sipPort</font>);</ul>
+        <ul>application.oJVccBar.SetAttribute("SipProtocol","UDP");	</ul>
+        <ul>application.oJVccBar.SetAttribute("PhonType",1);  //0:坐席卡；1：内置Sip；2：外置终端 3：远程sip电话; 4：软交换前传号码; 5：yealink话机 6：agora</ul>
+        <ul>application.oJVccBar.SetAttribute("AgentType",1);</ul>
+        <ul>application.oJVccBar.SetAttribute("SelfPrompt",0);</ul>
+        <ul>application.oJVccBar.SetAttribute("MediaFlag",<font color="red">vccID</font>);</ul>
+        <ul>application.oJVccBar.SetAttribute("AppType",0);</ul>
+        <ul>application.oJVccBar.SetAttribute("PassWord","111111");</ul>
+        <ul>application.oJVccBar.SetAttribute("AgentID","000010"+vccID+agentID);</ul>
+        <ul>application.oJVccBar.SetAttribute("Dn","000002"+vccID+agentID);</ul>
+        <ul>application.oJVccBar.SetAttribute("SipPassWord", sipPassword);//默认:00000000</ul>
+		
+		B.现场问题<br>
+		   <ul>如果现场的demo可以使用，但第三方厂家开发的系统不能登陆，请注意核对属性参数。如果还存在问题请提供现场电话条日志，日志位置(所有文件)：</ul>
+		        <ul><font color="red" size="3">xp下:   系统盘:\Documents and Settings\用户名\Application Data\cincc</font></ul>
+                <ul><font color="red" size="3">win7下：系统盘:\Users（用户）\用户名\AppData\Roaming\cincc</font></ul>
+	       <ul><font color="red" size="3">注意：</font>如果电话条没有日志，主要原因是电话条的使用用户没有读写文件的权限，请使用<font color="red">右键以“管理员身份运行”</font>重新卸载并安装电话条控件即可;</ul>
+	       <ul>从JS-CINVCCBar(1.0.0.12)之后电话条支持服务器端直接抓日志功能</ul>
+		<ul>下面列举常见的问题：</ul>
+		<ul>1、Sip注册出问题</ul>
+		   <ul>&nbsp;&nbsp;&nbsp;  sipclient:注册失败(408)：服务器无法访问，原因：SipServerIP错误、SipServerPort错误、坐席和服务器之间有防火墙；</ul>
+		   <ul>&nbsp;&nbsp;&nbsp;  sipclient:注册失败(401)：sip的密码错误；</ul>
+		<ul>2、CTI注册出问题</ul>
+		<ul>&nbsp;&nbsp;&nbsp;各种错误码详细见《CIN-DCP-CINVCCBAR错误码及对照表.pdf》</ul>
+
+    <br>
+	<li>版本更新</li>
+	   JS-CINVCCBar(1.0.0.9)，以后电话条的版本的插件部分提供自动更新功能，自动更新条件：<br>
+	   <ul>1、必须安装电话条；</ul>
+	   <ul>2、服务器minicc的版本必须是2015年8月份以后的版本，如果服务器端不支持，可以找维护人员手工布置；</ul>
+	   满足这个两个条件可以使用： <br>
+	    <ul>application.oJVccBar.SetAttribute('AutoUpdateURL',"http://ctiip:ctiweb端口/");</ul>
+
+</ol>
+</body>
+</html>

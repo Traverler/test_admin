@@ -1,0 +1,278 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=gb2312">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>JS versuib cinvccbar-all function</title>    
+	
+	<script src="scripts/japp.js" type="text/javascript"></script>
+	<script src="jbarextent.js" type="text/javascript"></script>
+	
+	<style> BODY { FONT-FAMILY: "Verdana"; FONT-SIZE: 12px; SCROLLBAR-HIGHLIGHT-COLOR: #f5f9ff; SCROLLBAR-SHADOW-COLOR: #828282; SCROLLBAR-3DLIGHT-COLOR: #828282; SCROLLBAR-ARROW-COLOR: #797979; SCROLLBAR-TRACK-COLOR: #ffffff; SCROLLBAR-FACE-COLOR: #66b7ef; SCROLLBAR-DARKSHADOW-COLOR: #ffffff }
+	</style>
+ </head>
+<body onload="window_onload();" >
+        <br>
+        <br>
+        <DIV style='position:absolute;border:0px solid #ff3900; left:10px;top:65px;'>
+        server&nbsp;&nbsp;&nbsp;ip&nbsp;: <input type="text" id="mainIP" value="192.168.2.136"size="12"  /><br>
+        corp&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;&nbsp;&nbsp;: <input type="text" id="vccID" size="12" value="100004"  /> <br>
+		agentID&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" id="agentID" value="6301" size="12"  /><br>
+		sip&nbsp;&nbsp;&nbsp;port&nbsp;&nbsp;&nbsp;: <input type="text" id="sipPort" value="5060" size="12"  /><br>
+		sip&nbsp;passwd: <input type="text" id="sipPassword" value="00000000" size="12"  />
+		</DIV>
+		<DIV style='position:absolute;border:0px solid #000000; left:10px;top:180px;'>
+		    dest param&nbsp;&nbsp;:
+		    <INPUT type="text" id="DestNum" NAME="DestNum" size="18" title="value:DestNum"><br>
+		    assist param:
+		    <INPUT type="text" id="DestNum2" NAME="DestNum2"  size="18"  title="value:DestNum2" >
+		</DIV>
+		<DIV style='position:absolute;border:0px solid #000000; left:217px;top:65px;'>
+               <input id='btncmd1' type="button" onclick='funChangePad(1);' style="background:#f5f9ff; border:0 " value="base method"/>
+               <input id='btncmd2' type="button" onclick='funChangePad(2);' style="background:#f5f9ff; border:0 " value="base status"/>
+               <input id='btncmd3' type="button" onclick='funChangePad(3);' style="background:#f5f9ff; border:0 " value="call method"/>
+               <input id='btncmd4' type="button" onclick='funChangePad(4);' style="background:#f5f9ff; border:0 " value="listen method"/>
+               <input id='btncmd5' type="button" onclick='funChangePad(5);' style="background:#f5f9ff; border:0 " value="monitor method"/>
+               <input id='btncmd6' type="button" onclick='funChangePad(6);' style="background:#f5f9ff; border:0 " value="extent method"/>
+		</DIV>
+	    <div id ="divPad1" style="position:absolute;border:0px solid #4A9DF9;left:217px;top:85px; display:none;"  >
+                <br>
+                <input id='btnInitial' type="button" onclick='funInitial();'  value="Initial" title="execute:Initial()" />
+                <input id='btnUnInitial' type="button" onclick='application.oJVccBar.UnInitial();' value="UnInitial" title="execute:UnInitial()" />
+                <input id='btnSerialBtn' type="button" onclick='application.oJVccBar.SerialBtn(DestNum.value,DestNum2.value);' value="SerialBtn" title="execute:SerialBtn(DestNum,DestNum2) " />
+                <input id='btnGetBtnStatus' type="button" onclick='alert(application.oJVccBar.GetBtnStatus(DestNum.value));' value="GetBtnStatus" title="execute:GetBtnStatus(DestNum) " />
+                <br>
+				<input id="btnConfigurate" onclick="application.oJVccBar.Configurate(DestNum.value);" type="button" value="Configurate" title="execute:Configurate(DestNum.value)">
+				<input id="btnGetConfiguration" onclick="alert(application.oJVccBar.GetConfiguration());" type="button" value="GetConfiguration" title="execute:GetConfiguration()">
+                <input id='btnTrace' type="button" onclick='funtionTrace();' value="log" title="display log infor" />
+                <input id='btnSetUIStyle' type="button" onclick='application.oJVccBar.SetUIStyle(DestNum.value)();' value="SetUIStyle" title="Set agent style using in ocx" />
+                <input id='btnGetVersion' type="button" onclick='alert(application.oJVccBar.GetVersion());' value="GetVersion" title="execute:GetVersion()" />
+                <input id='btnTest' type="button" onclick='functionTest();' value="test" title="execute:functionTest();" />
+                <br>
+                <br>
+		</div>	
+	    <div id ="divPad2" style="position:absolute;border:0px solid #ff00ff;left:217px;top:85px; display:none;"  >
+                <br>
+			    <input id="btnSetBusy" onclick="application.oJVccBar.SetBusy(DestNum.value);" type="button" value="SetBusy" title="execute:SetBusy(DestNum.value)">
+			    <input id="btnSetIdle" onclick="application.oJVccBar.SetIdle();" type="button" value="SetIdle"  title="execute:SetIdle()">
+			    <input id="btnSetWrapUp" onclick="application.oJVccBar.SetWrapUp();" type="button" value="SetWrapUp"  title="unusefull">
+			    <input id="btnSetCTICalloutTask" onclick="application.oJVccBar.SetCTICalloutTask(DestNum.value);" type="button" value="SetCTICalloutTask"  title="execute:SetCTICalloutTask(DestNum.value);">
+			    <input id="btnGetCTICalloutTask" onclick="application.oJVccBar.GetCTICalloutTask();" type="button" value="GetCTICalloutTask"  title="execute:GetCTICalloutTask();">
+			    <input id="btnGetCallData" onclick="application.oJVccBar.GetCallData(DestNum.value);" type="button" value="GetCallData"  title="execute:GetCallData(DestNum.value);">
+			    <input id="btnSetCallData" onclick="application.oJVccBar.SetCallData(DestNum.value,DestNum2.value);" type="button" value="SetCallData"  title="execute:SetCallData(DestNum.value,DestNum2.value);">
+			    <input id="btnGetTransfer" onclick="application.oJVccBar.GetTransfer();" type="button" value="GetTransfer"  title="execute:GetTransfer();">
+			    <input id="btnSetTransfer" onclick="application.oJVccBar.SetTransfer(DestNum.value);" type="button" value="SetTransfer"  title="execute:SetTransfer(DestNum.value);">
+			    <input id="btnChangeCallQueue" onclick="application.oJVccBar.ChangeCallQueue(DestNum.value,DestNum2.value,'000');" type="button" value="ChangeCallQueue"   title="execute:ChangeCallQueue(DestNum.value,DestNum2.value,'000');">
+			    <input id="btnGetCallID" onclick="application.oJVccBar.GetCallID();" type="button" value="GetCallID"  title="execute:GetCallID();">
+ 				<input id="btnQuerySPGroupList" onclick="application.oJVccBar.QuerySPGroupList(DestNum.value,-1,parseInt(DestNum2.value),1);" type="button" value="QuerySPGroupList"  title="execute:QuerySPGroupList(DestNum.value,-1,parseInt(DestNum2.value),1);">
+			    <input id="btnGetCallInfo" onclick="application.oJVccBar.GetCallInfo();" type="button" value="GetCallInfo"  title="执行:GetCallInfo();">
+			    <input id="btnSetTransparentParameter" onclick="application.oJVccBar.SetTransparentParameter(DestNum.value);" type="button" value="SetTransparentParameter"  title="execute:SetTransparentParameter(DestNum.value);">
+				<input id="btnGetAgentStatus" onclick="alert(application.oJVccBar.GetAgentStatus());" type="button" value="GetAgentStatus"   title="execute:GetAgentStatus();">
+				<input id="btnGetBusySubStatus" onclick="alert(application.oJVccBar.GetBusySubStatus());" type="button" value="GetBusySubStatus"   title="execute:GetBusySubStatus();">
+			    <input id="btnSetDisplayNumber" onclick="application.oJVccBar.SetDisplayNumber(DestNum.value);" type="button" value="SetDisplayNumber"  title="execute:SetDisplayNumber(DestNum.value);">
+			    <input id="btnGetDisplayNumber" onclick="application.oJVccBar.GetDisplayNumber();" type="button" value="GetDisplayNumber"  title="execute:GetDisplayNumber();">			    
+				<input id="btnCallQueueQuery" onclick="application.oJVccBar.CallQueueQuery(DestNum.value);" type="button" value="CallQueueQuery"   title="execute:CallQueueQuery(DestNum.value);" >
+				<input id="btnQueryGroupAgentStatus" onclick="application.oJVccBar.QueryGroupAgentStatus(DestNum.value,parseInt(DestNum2.value),10);" type="button" value="QueryGroupAgentStatus"  title="execute:QueryGroupAgentStatus(DestNum.value,parseInt(DestNum1.value),10);">
+				<input id="btnQueryPreViewCallOutNumbers" onclick="application.oJVccBar.QueryPreViewCallOutNumbers(DestNum.value,DestNum2.value,50,1);" type="button" value="QueryPreViewCallOutNumbers"  title="execute:QueryPreViewCallOutNumbers(DestNum.value,DestNum1.value,50,1);">
+			    <input id="btnGetBase64Data" onclick="application.oJVccBar.GetBase64Data(DestNum.value);" type="button" value="GetBase64Data"  title="execute:GetBase64Data(DestNum.value);">
+			    <input id="btnGetDataFromBase64" onclick="application.oJVccBar.GetDataFromBase64(DestNum.value);" type="button" value="GetDataFromBase64"  title="execute:GetDataFromBase64(DestNum.value);">
+			    <input id="btnSetWeChatQueueFlag" onclick="application.oJVccBar.SetWeChatQueueFlag(parseInt(DestNum.value));" type="button" value="SetWeChatQueueFlag"  title="execute:SetWeChatQueueFlag(parseInt(DestNum.value));">
+			    <input id="btnGetWeChatQueueFlag" onclick="application.oJVccBar.GetWeChatQueueFlag();" type="button" value="GetWeChatQueueFlag"  title="execute:GetWeChatQueueFlag();">			    
+			    <input id="btnTransferCallQueue" onclick="application.oJVccBar.TransferCallQueue(DestNum.value,0,DestNum2.value);" type="button" value="TransferCallQueue"   title="execute:TransferCallQueue(DestNum.value,0,DestNum2.value);">
+			    <input id="btnSetActiveService" onclick="application.oJVccBar.SetActiveService(DestNum.value);" type="button" value="SetActiveService"  title="execute:SetActiveService(DestNum.value);">
+			    <input id="btnGetActiveService" onclick="application.oJVccBar.GetActiveService();" type="button" value="GetActiveService"  title="execute:GetActiveService();">
+
+		</div>	
+	    <div id ="divPad3" style="position:absolute;border:0px solid #ff00ff;left:217px;top:85px; display:none;"  >
+                <br>
+				<input id="btnMakeCall" onclick="application.oJVccBar.MakeCall(DestNum.value,2,'','',DestNum2.value);" type="button" value="MakeCall" title="execute:MakeCall(DestNum.value,2,'','',DestNum2.value);" >
+				<input id="btnCallIn" onclick="application.oJVccBar.CallIn(DestNum.value,5,'',DestNum2.value);" type="button" value="CallIn" title="execute:CallIn(DestNum.value,5,"",DestNum2.value);" >
+				<input id="btnTransferOut" onclick="application.oJVccBar.TransferOut(parseInt(DestNum2.value),DestNum.value);" type="button" value="TransferOut"  title="execute:TransferOut(parseInt(DestNum2.value),DestNum.value)" >
+				<input id="btnHold" onclick="application.oJVccBar.Hold();" type="button" value="Hold" title="execute:Hold();" >
+				<input id="btnRetrieveHold" onclick="application.oJVccBar.RetrieveHold();" type="button" value="RetrieveHold"   title="execute:RetrieveHold();" >
+				<input id="btnDisconnect" onclick="application.oJVccBar.Disconnect(parseInt(DestNum.value));" type="button" value="Disconnect"   title="execute:Disconnect(parseInt(DestNum.value));" >
+				<input id="btnAnswer" onclick="application.oJVccBar.Answer(parseInt(DestNum.value));" type="button" value="Answer"   title="execute:Answer(parseInt(DestNum.value));" >
+				<input id="btnConsult" onclick="application.oJVccBar.Consult(parseInt(DestNum2.value),DestNum.value);" type="button" value="Consult"   title="execute:Consult(parseInt(DestNum2.value),DestNum.value);" >
+				<input id="btnTransfer" onclick="application.oJVccBar.Transfer();" type="button" value="Transfer"   title="execute:Transfer();" >
+				<input id="btnConference" onclick="application.oJVccBar.Conference();" type="button" value="Conference"   title="execute:Conference();" >
+                <br>
+				<input id="btnSendDTMF" onclick="application.oJVccBar.SendDTMF(DestNum.value);" type="button" value="SendDTMF" title="execute:SendDTMF(DestNum.value);" >
+				<input id="btnBeginRecord" onclick="application.oJVccBar.BeginRecord(DestNum.value,DestNum2.value);" type="button" value="BeginRecord"  title="execute:BeginRecord(DestNum.value,DestNum2.value); [disable]"  >
+				<input id="btnStopRecord" onclick="application.oJVccBar.StopRecord(DestNum.value);" type="button" value="StopRecord"  title="execute:StopRecord(DestNum.value); [disable]"  >
+				<input id="btnBeginPlay" onclick="application.oJVccBar.BeginPlay(DestNum.value,'',2,'message.wav','1');" type="button" value="BeginPlay"  title="execute:BeginPlay(DestNum.value,'',2,'message.wav','1');"  >
+				<input id="btnStopPlay" onclick="application.oJVccBar.StopPlay(DestNum.value,'');" type="button" value="StopPlay"  title="execute:StopPlay(DestNum.value,'');"  >
+				<input id="btnBridge" onclick="application.oJVccBar.Bridge(DestNum.value,parseInt(DestNum2.value));" type="button" value="Bridge"  title="execute:Bridge(DestNum.value,parseInt(DestNum2.value));"  >
+				<input id="btnMute" onclick="application.oJVccBar.Mute(parseInt(DestNum.value));" type="button" value="Mute"   title="execute:Mute(parseInt(DestNum.value));" >
+				<input id="btnAlterNate" onclick="application.oJVccBar.AlterNate(DestNum.value);" type="button" value="AlterNate" title="execute:AlterNate(DestNum.value);" >
+                <br>
+				<input id="btnCallBack" onclick="application.oJVccBar.CallBack();" type="button" value="CallBack" title="execute:CallBack();" >
+				<input id="btnReCall" onclick="application.oJVccBar.ReCall();" type="button" value="ReCall"   title="execute:ReCall();" >
+				<input id="btnSMMsg" onclick="application.oJVccBar.SMMsg(DestNum.value,DestNum2.value);" type="button" value="SMMsg"  title="execute:SMMsg(DestNum.value,DestNum2.value);"  >
+				<input id="btnReleaseThirdOne" onclick="application.oJVccBar.ReleaseThirdOne(parseInt(DestNum.value));" type="button" value="ReleaseThirdOne"   title="execute:ReleaseThirdOne(parseInt(DestNum.value));" >
+				<INPUT id="btnBeginCollect" onclick="application.oJVccBar.BeginCollect(DestNum.value,DestNum2.value,0,'',1,1,'','',20,10);" type="button" value="BeginCollect" title="execute:BeginCollect(DestNum.value,DestNum2.value,0,'',1,1,'','',20,10);" >
+				<INPUT id="btnStopCollect" onclick="application.oJVccBar.StopCollect(DestNum.value,DestNum2.value);" type="button" value="StopCollect"  title="execute:StopCollect(DestNum.value,DestNum2.value);" >
+				<input id="btnFroceReset" onclick="application.oJVccBar.ForceReset();" type="button" value="FroceReset"  title="execute:FroceReset()">
+				<input id="btnSendIMMessage" onclick="application.oJVccBar.SendIMMessage( '','','',1,0,DestNum.value);" type="button" value="SendIMMessage"  title="execute:SendIMMessage( '','','',1,0,DestNum.value);">
+		</div>	
+	    <div id ="divPad4" style="position:absolute;border:0px solid #ff00ff;left:217px;top:85px; display:none;"  >
+                <br>
+ 				<input id="btnForceClear" onclick="application.oJVccBar.ForeReleaseCall(DestNum.value);" type="button" value="ForeReleaseCall"  title="execute:ForeReleaseCall(DestNum.value)" >
+				<input id="btnInsert" onclick="application.oJVccBar.Insert(DestNum.value);" type="button" value="Insert" title="execute:Insert(DestNum.value)" >
+				<input id="btnListen" onclick="application.oJVccBar.Listen(DestNum.value);" type="button" value="Listen" title="execute:Listen(DestNum.value)" >
+				<input id="btnIntercept" onclick="application.oJVccBar.Intercept(DestNum.value);" type="button" value="Intercept" title="execute:Intercept(DestNum.value)" >
+				<input id="btnHelp" onclick="application.oJVccBar.Help(DestNum.value);" type="button" value="Help"  title="execute:Help(DestNum.value)" >
+		        <input id="btnForceIdle" onclick="application.oJVccBar.ForceIdle(DestNum.value);" type="button" value="ForceIdle" title="execute:ForceIdle(DestNum.value)">
+                <br>
+				<input id="btnForceBusy" onclick="application.oJVccBar.ForceBusy(DestNum.value);" type="button" value="ForceBusy"  title="execute:ForceBusy(DestNum.value)">
+				<input id="btnForceOut" onclick="application.oJVccBar.ForceOut(DestNum.value);" type="button" value="ForceOut"  title="execute:ForceOut(DestNum.value)">
+				<input id="btnLock" onclick="application.oJVccBar.Lock(DestNum.value);" type="button" value="Lock"  title="execute:Lock(DestNum.value);[system function]">
+				<input id="btnUnLock" onclick="application.oJVccBar.UnLock(DestNum.value);" type="button" value="UnLock"  title="execute:UnLock(DestNum.value)">
+		</div>	
+	    <div id ="divPad5" style="position:absolute;border:0px solid #ff00ff;left:217px;top:85px; display:none;"  >
+                <br>
+ 				<input id="btnInitialState" onclick="application.oJVccBar.InitialState();" type="button" value="InitialState"  title="execute:InitialState();" >
+				<input id="btnAgentQuery" onclick="application.oJVccBar.AgentQuery(DestNum.value,parseInt(DestNum2.value));" type="button" value="AgentQuery"  title="execute:AgentQuery(DestNum.value,parseInt(DestNum2.value));" >
+				<input id="btnTelQuery" onclick="application.oJVccBar.TelQuery(DestNum.value,parseInt(DestNum2.value));" type="button"  value="TelQuery" title="execute:TelQuery(DestNum.value,parseInt(DestNum2.value));" >
+				<input id="btnIvrQuery" onclick="application.oJVccBar.IvrQuery(DestNum.value,parseInt(DestNum2.value));" type="button"  value="IvrQuery" title="execute:IvrQuery(DestNum.value,parseInt(DestNum2.value));" >
+				<input id="btnServiceQuery" onclick="application.oJVccBar.ServiceQuery(DestNum.value,parseInt(DestNum2.value));" type="button"  value="ServiceQuery" title="execute:ServiceQuery(DestNum.value,parseInt(DestNum2.value));" >
+                <br>
+				<input id="btnTaskQuery" onclick="application.oJVccBar.TaskQuery(DestNum.value,parseInt(DestNum2.value));" type="button"  value="TaskQuery" title="execute:TaskQuery(DestNum.value,parseInt(DestNum2.value));" >
+				<input id="btnCallReportQuery" onclick="application.oJVccBar.CallReportQuery(DestNum.value,parseInt(DestNum2.value));" type="button"  value="CallReportQuery" title="execute:CallReportQuery(DestNum.value,parseInt(DestNum2.value));" >
+				<input id="btnGetTaskSummary" onclick="application.oJVccBar.GetTaskSummary(DestNum.value,DestNum2.value);" type="button"  value="GetTaskSummary" title="execute:GetTaskSummary(DestNum.value,DestNum2.value);" >
+                <br>
+				<input id="btnQueryMonitorSumInfo" onclick="application.oJVccBar.QueryMonitorSumInfo(DestNum.value,DestNum2.value);" type="button" value="QueryMonitorSumInfo" title="execute:QueryMonitorSumInfo(DestNum.value,DestNum2.value);" >
+				<input id="btnStartNotification" onclick="application.oJVccBar.StartNotification(DestNum.value,DestNum2.value,'');" type="button" value="StartNotification"  title="execute:StartNotification(DestNum.value,DestNum2.value,'');" >
+				<input id="btnEndNotification" onclick="application.oJVccBar.EndNotification(DestNum.value);" type="button" value="EndNotification" title="execute:EndNotification(DestNum.value);" >
+	            <br>
+		</div>	
+	    <div id ="divPad6" style="position:absolute;border:0px solid #ff00ff;left:217px;top:85px; display:none;"  >
+                <br>
+ 				<input id="btnSendWeiboMsg" onclick="application.oJVccBar.SendWeiboMsg(DestNum.value);" type="button" value="SendWeiboMsg" title="【can't be usefull now】" >
+				<input id="btnUploadFileToMMS" onclick="application.oJVccBar.UploadFileToMMS(DestNum.value,0);" type="button" value="UploadFileToMMS" title="execute:UploadFileToMMS" >
+				<input id="btnDownFileFromMMS" onclick="application.oJVccBar.DownFileFromMMS(DestNum.value,DestNum2.value,'');" type="button" value="DownFileFromMMS" title="execute:DownFileFromMMS" >
+                <br>
+				<input id="btnSendWeChatMsg" onclick="funSendWechat();" type="button" value="SendWechat" title="execute:SendWeChatMsg"  >
+				<input id="btnQueryWeChatData" onclick="application.oJVccBar.QueryWeChatData(DestNum.value);" type="button" value="QueryWeChatData"  title="execute: QueryWeChatData" >
+				<input id="btnQueryWeChatHistory" onclick="application.oJVccBar.QueryWeChatHistory(DestNum.value);" type="button" value="QueryWeChatHistory"  title="execute: QueryWeChatHistory" >
+				<input id="btnGetWeChatParam" onclick="application.oJVccBar.GetWeChatParam(DestNum.value);" type="button" value="GetWeChatParam"  title="execute: GetWeChatParam" >
+	        <br>
+		</div>	
+        <DIV style='position:absolute;border:0px solid #00ff00; left:10px;top:226px;'>
+		<TEXTAREA id="TextareaInfo" name="TextareaInfo" rows="30" cols="160" value="" style="overflow:auto;font-family:verdana;font-size:12px"></TEXTAREA>
+		</DIV>
+
+</body>
+   <script type="text/javascript">
+    var g_showIndex = 1;
+    function funChangePad(index)
+    {  
+        var oPad = document.getElementById("divPad"+g_showIndex);
+        oPad.style.display = "none";
+        
+        var oBtn = document.getElementById("btncmd"+g_showIndex);
+        oBtn.style.background = "#f5f9ff";
+        
+        oPad = document.getElementById("divPad"+index);
+        oPad.style.display = "block";
+        oBtn = document.getElementById("btncmd"+index);
+        oBtn.style.background = "#80BEC4";
+        
+        g_showIndex = index;
+    }
+   	function funInitial() 
+	{
+	    var  serverIP = document.getElementById("mainIP").value;
+	    var  vccID = document.getElementById("vccID").value;
+	    var  agentID  = document.getElementById("agentID").value;
+	    var  sipPort = document.getElementById("sipPort").value;
+		var  sipPassword = document.getElementById("sipPassword").value;
+        application.oJVccBar.SetAttribute("MainIP",serverIP);  //MainIP
+        application.oJVccBar.SetAttribute("MainPortID",14800);  //MainPort
+        application.oJVccBar.SetAttribute("BackIP",serverIP);  //BackIP
+        application.oJVccBar.SetAttribute("BackPortID",14800);  //BackPort
+        application.oJVccBar.SetAttribute("MonitorIP",serverIP);  //MonitorIP
+        application.oJVccBar.SetAttribute("MonitorPort",4502);  //MainPort
+        application.oJVccBar.SetAttribute("SipServerIP",serverIP);
+        application.oJVccBar.SetAttribute("SipServerPort",parseInt(sipPort));
+        application.oJVccBar.SetAttribute("SipProtocol","UDP");	
+        application.oJVccBar.SetAttribute("PhonType",1);  //0:内置坐席卡；1：内置Sip；2：外置其他终端
+        application.oJVccBar.SetAttribute("AgentType",1);
+        application.oJVccBar.SetAttribute("SelfPrompt",0);
+        application.oJVccBar.SetAttribute("MediaFlag",vccID);
+        application.oJVccBar.SetAttribute("AppType",2);
+        application.oJVccBar.SetAttribute("PassWord","111111");
+        application.oJVccBar.SetAttribute("AgentID","000010"+vccID+agentID);
+        application.oJVccBar.SetAttribute("Dn","000002"+vccID+agentID);
+		application.oJVccBar.SetAttribute("SipPassWord", sipPassword);
+        application.oJVccBar.Initial();
+	}
+
+	function window_onload()
+	{
+	    if(document.readyState=="complete")
+	    {
+	        funChangePad(1);
+			/*
+	        var param = "211.150.71.180|100998|4005|5066";
+	        var oParam = param.split("|"); 
+	        mainIP.value = oParam[0];
+	        vccID.value = oParam[1];
+	        agentID.value = oParam[2];
+	        sipPort.value = oParam[3];
+			*/
+	    }
+	    applicationLoad(10,10,960,36,showStyleAUTTO,"",setVccBarEvent);
+	}
+	
+	function funSendWechat()
+	{
+	    if(DestNum.value == "text")
+	    {
+	        application.oWechatManager.SendWechTextMessage("",DestNum2.value);
+	    }
+	}
+	
+	
+	
+   var digLog = null;
+   function funtionTrace(){
+	    digLog = new divDialog(parseInt(event.clientX),parseInt(event.clientY),260,180,1,0,null);
+		var shtml = "<p>&nbsp;&nbsp;log level:";
+		shtml = shtml + "<select id='oLogSel' name='styles'>"
+		shtml = shtml + 	"<option value=0 selected>no log"
+		shtml = shtml + 	"<option value=1 >fetal"
+		shtml = shtml + 	"<option value=2 >warning"
+		shtml = shtml + 	"<option value=3 >debug"
+		shtml = shtml + 	"<option value=4 >information"
+		shtml = shtml + 	"<option value=5 >protecol"
+		shtml = shtml + 	"<option value=6 >all"
+		shtml = shtml + 	"</select></p>"
+		shtml = shtml + 	"<p align='center'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='ok' onclick='OnSettingLog();' type='button' value='setting' ><input id='cancel' onclick='digLog.eCloseDiv();' type='button' value='cancel' ></p>";	
+		digLog.setSetContent(shtml);	
+		digLog.setTitle("log setting");    
+	    digLog.show(1);
+   
+   }
+   function OnSettingLog(){
+        var oSelType = document.getElementById("oLogSel");
+        var callType = oSelType.options[oSelType.options.selectedIndex].value;
+        gLogType = callType;
+        if(gLogType>VccBar_Log_None){
+            application.DislayLog(1);
+        }
+        else{
+            application.DislayLog(0);
+        }
+        digLog.eCloseDiv();
+        
+   }
+   function functionTest(){
+      test();
+   }
+
+    
+
+
+    </script>
+
+</html>
+
